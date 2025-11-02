@@ -1,5 +1,6 @@
 import {
   BottomSheetModal,
+  BottomSheetModalProps,
   BottomSheetView,
   BottomSheetModalProvider as GorhomProvider,
 } from "@gorhom/bottom-sheet";
@@ -25,12 +26,17 @@ import { BlurBackdrop } from "../components/BlurBackdrop";
 
 /** 🎯 Context tipi */
 interface BottomSheetContextType {
-  openSheet: (content: ReactNode, snapPoints?: string[]) => void;
+  openSheet: (
+    content: ReactNode,
+    snapPoints?: string[],
+    modalProps?: Partial<BottomSheetModalProps>
+  ) => void;
   closeSheet: () => void;
   presentWithProps: <T extends object>(
     Component: React.ComponentType<T>,
     props: T,
-    snapPoints?: string[]
+    snapPoints?: string[],
+    modalProps?: Partial<BottomSheetModalProps>
   ) => void;
 }
 
@@ -53,6 +59,9 @@ export const BottomSheetModalProvider = ({
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const [content, setContent] = useState<ReactNode>(null);
   const [snapPoints, setSnapPoints] = useState(["40%", "75%"]);
+  const [customModalProps, setCustomModalProps] = useState<
+    Partial<BottomSheetModalProps>
+  >({});
 
   // 🎬 Animasyon state
   const progress = useSharedValue(0);
@@ -99,8 +108,13 @@ export const BottomSheetModalProvider = ({
 
   /** ✅ Sheet açma */
   const openSheet = useCallback(
-    (node: ReactNode, snaps?: string[]) => {
+    (
+      node: ReactNode,
+      snaps?: string[],
+      modalProps?: Partial<BottomSheetModalProps>
+    ) => {
       if (snaps) setSnapPoints(snaps);
+      if (modalProps) setCustomModalProps(modalProps);
       setContent(node);
 
       requestAnimationFrame(() => {
@@ -119,9 +133,9 @@ export const BottomSheetModalProvider = ({
     progress.value = withTiming(
       0,
       { duration: 260, easing: Easing.bezier(0.4, 0, 0.2, 1) },
-      // ⛳️ Yeni yaklaşım: doğrudan setState çağrısı (runOnJS gerekmez)
       () => {
         runOnJS(setContent)(null);
+        runOnJS(setCustomModalProps)({});
       }
     );
     bottomSheetRef.current?.dismiss();
@@ -132,10 +146,11 @@ export const BottomSheetModalProvider = ({
     <T extends object>(
       Component: React.ComponentType<T>,
       props: T,
-      snaps?: string[]
+      snaps?: string[],
+      modalProps?: Partial<BottomSheetModalProps>
     ) => {
       const element = React.createElement(Component, { ...props, closeSheet });
-      openSheet(element, snaps);
+      openSheet(element, snaps, modalProps);
     },
     [openSheet, closeSheet]
   );
@@ -154,11 +169,12 @@ export const BottomSheetModalProvider = ({
           <BottomSheetModal
             ref={bottomSheetRef}
             snapPoints={snapPoints}
-            enablePanDownToClose
-            enableDismissOnClose
+            // ✅ DEFAULT PROPS - Zaten tanımlı
+            enablePanDownToClose={true}
+            enableDismissOnClose={true}
             handleIndicatorStyle={{ backgroundColor: "#999" }}
             backgroundStyle={{
-              backgroundColor: "rgba(255,255,255,0.97)",
+              backgroundColor: "rgba(255,255,255,1)",
               borderRadius: 20,
             }}
             animationConfigs={{
@@ -168,6 +184,7 @@ export const BottomSheetModalProvider = ({
             backdropComponent={(props) => (
               <BlurBackdrop {...props} onPress={closeSheet} />
             )}
+            {...customModalProps}
           >
             <BottomSheetView style={{ flex: 1 }}>{content}</BottomSheetView>
           </BottomSheetModal>
