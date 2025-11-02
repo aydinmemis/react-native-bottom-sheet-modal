@@ -1,0 +1,41 @@
+{
+  "name": "@aydinmemis/react-native-bottom-sheet-modal",
+  "version": "1.0.0",
+  "description": "Beautifully animated and lightweight BottomSheet modal built with @gorhom/bottom-sheet and Reanimated 4.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "react-native",
+    "bottom-sheet",
+    "modal",
+    "gorhom",
+    "reanimated",
+    "animated",
+    "provider"
+  ],
+  "author": "Aydın Memiş",
+  "license": "MIT",
+  "peerDependencies": {
+    "@gorhom/bottom-sheet": ">=5.0.0",
+    "react": ">=18",
+    "react-native": ">=0.73",
+    "react-native-gesture-handler": ">=2.14.0",
+    "react-native-reanimated": ">=3.6.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-native": "^0.72.8",
+    "typescript": "^5.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
