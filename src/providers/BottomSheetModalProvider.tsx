@@ -12,7 +12,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import Animated, {
+import {
   Easing,
   Extrapolation,
   interpolate,
@@ -127,7 +127,7 @@ export const BottomSheetModalProvider = ({
     bottomSheetRef.current?.dismiss();
   }, [progress]);
 
-  /** ✅ Component’i props ile aç */
+  /** ✅ Component'i props ile aç */
   const presentWithProps = useCallback(
     <T extends object>(
       Component: React.ComponentType<T>,
@@ -169,9 +169,7 @@ export const BottomSheetModalProvider = ({
               <BlurBackdrop {...props} onPress={closeSheet} />
             )}
           >
-            <Animated.View style={[{ flex: 1, padding: 20 }, animatedStyle]}>
-              <BottomSheetView style={{ flex: 1 }}>{content}</BottomSheetView>
-            </Animated.View>
+            <BottomSheetView style={{ flex: 1 }}>{content}</BottomSheetView>
           </BottomSheetModal>
         )}
       </BottomSheetContext.Provider>
