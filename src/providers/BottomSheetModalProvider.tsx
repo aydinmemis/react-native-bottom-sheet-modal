@@ -170,7 +170,7 @@ export const BottomSheetModalProvider = ({
             )}
           >
             <Animated.View style={[{ flex: 1, padding: 20 }, animatedStyle]}>
-              <BottomSheetView>{content}</BottomSheetView>
+              <BottomSheetView style={{ flex: 1 }}>{content}</BottomSheetView>
             </Animated.View>
           </BottomSheetModal>
         )}
