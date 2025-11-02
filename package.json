@@ -1,6 +1,6 @@
 {
   "name": "@aydinmemis/react-native-bottom-sheet-modal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Beautifully animated and lightweight BottomSheet modal built with @gorhom/bottom-sheet and Reanimated 4.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -23,6 +23,14 @@
   ],
   "author": "Aydın Memiş",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aydinmemis/react-native-bottom-sheet-modal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aydinmemis/react-native-bottom-sheet-modal/issues"
+  },
+  "homepage": "https://github.com/aydinmemis/react-native-bottom-sheet-modal#readme",
   "peerDependencies": {
     "@gorhom/bottom-sheet": ">=5.0.0",
     "react": ">=18",
