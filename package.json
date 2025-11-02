@@ -1,6 +1,6 @@
 {
   "name": "@aydinmemis/react-native-bottom-sheet-modal",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Beautifully animated and lightweight BottomSheet modal built with @gorhom/bottom-sheet and Reanimated 4.",
   "main": "dist/index.js",
   "module": "dist/index.js",
